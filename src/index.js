@@ -1,12 +1,14 @@
 'use strict';
 
 var {
-  Image,
+  ImageBackground,
   StyleSheet,
   TouchableHighlight,
   View
 } = require('react-native');
 var React = require('react');
+var PropTypes = require('prop-types');
+var createClass = require('create-react-class');
 var tweenState = require('react-tween-state');
 var styles = require('./styles');
 var images = require('./images');
@@ -33,8 +35,8 @@ var ProgressHUDMixin = {
   },
 
   childContextTypes: {
-    showProgressHUD: React.PropTypes.func,
-    dismissProgressHUD: React.PropTypes.func
+    showProgressHUD: PropTypes.func,
+    dismissProgressHUD: PropTypes.func
   },
 
   getChildContext() {
@@ -45,12 +47,12 @@ var ProgressHUDMixin = {
   },
 };
 
-var ProgressHUD = React.createClass({
+var ProgressHUD = createClass({
   mixins: [tweenState.Mixin],
 
   contextTypes: {
-    showProgressHUD: React.PropTypes.func,
-    dismissProgressHUD: React.PropTypes.func
+    showProgressHUD: PropTypes.func,
+    dismissProgressHUD: PropTypes.func
   },
 
   statics: {
@@ -58,10 +60,10 @@ var ProgressHUD = React.createClass({
   },
 
   propTypes: {
-    isDismissible: React.PropTypes.bool,
-    isVisible: React.PropTypes.bool.isRequired,
-    color: React.PropTypes.string,
-    overlayColor: React.PropTypes.string
+    isDismissible: PropTypes.bool,
+    isVisible: PropTypes.bool.isRequired,
+    color: PropTypes.string,
+    overlayColor: PropTypes.string
   },
 
   getDefaultProps() {
@@ -133,7 +135,7 @@ var ProgressHUD = React.createClass({
             left: this.getTweeningValue('left')
           }]}
         >
-          <Image
+          <ImageBackground
             style={[styles.spinner, {
               backgroundColor: this.props.color,
               transform: [
@@ -147,7 +149,7 @@ var ProgressHUD = React.createClass({
           >
             <View style={styles.inner_spinner}>
             </View>
-          </Image>
+          </ImageBackground>
         </View>
       </TouchableHighlight>
       /*jshint ignore:end */
